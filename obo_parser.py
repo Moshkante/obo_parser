@@ -229,18 +229,18 @@ def _compute_children_column(obo_records_dict):
     for term_id, current_record in obo_records_dict.items():
         if "is_a" not in current_record:
             continue
+  
+        parent_id = current_record["is_a"]
+        if parent_id not in obo_records_dict:
+            logger.warning("%s has a parent id %s which is not in the ontology" % (
+                term_id, parent_id))
+            continue
 
-        for parent_id in current_record["is_a"]:
-            if parent_id not in obo_records_dict:
-                logger.warning("%s has a parent id %s which is not in the ontology" % (
-                    term_id, parent_id))
-                continue
+        parent_record = obo_records_dict[parent_id]
+        if 'children' not in parent_record:
+            parent_record['children'] = []
 
-            parent_record = obo_records_dict[parent_id]
-            if 'children' not in parent_record:
-                parent_record['children'] = []
-
-            parent_record['children'].append(term_id)
+        parent_record['children'].append(term_id)
 
 
 def compute_category_column(
