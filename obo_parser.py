@@ -89,8 +89,8 @@ def parse_obo_format(lines):
     """
 
     obo_records_dict = collections.OrderedDict()
-    current_stanza_type = None
-    current_record = None #error must be here somewhere!
+    current_stanza_type = {}
+    current_record = {} #error must be here somewhere!
     if logger.isEnabledFor(logging.INFO):
         lines = tqdm.tqdm(lines, unit=" lines")
 
@@ -129,7 +129,8 @@ def parse_obo_format(lines):
 
             current_record[tag] = value
         else:
-            current_record[tag].append(value)
+            current_record[tag] = value
+            #current_record[tag].append(value)
 
     # add a 'children' key and list of child ids to all records that have children
     _compute_children_column(obo_records_dict)
