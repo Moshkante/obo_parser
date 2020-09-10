@@ -99,7 +99,7 @@ def parse_obo_format(lines):
             line = line.decode('utf-8') #from byte to string if necessary
             
         if line.startswith("["):
-            current_stanza_type = line.strip("[]\n")
+            current_stanza_type = line.strip("[]")
             continue
 
         # skip header lines and stanzas that aren't "Terms"
@@ -232,7 +232,7 @@ def _compute_children_column(obo_records_dict):
 
         for parent_id in current_record["is_a"]:
             if parent_id not in obo_records_dict:
-                logger.warn("%s has a parent id %s which is not in the ontology" % (
+                logger.warning("%s has a parent id %s which is not in the ontology" % (
                     term_id, parent_id))
                 continue
 
@@ -265,7 +265,7 @@ def compute_category_column(
     root_child_ids = root_record.get('children', [])
 
     if not root_child_ids:
-        logger.warn("root term has no child terms")
+        logger.warning("root term has no child terms")
         return
 
     for category_id in root_child_ids:
