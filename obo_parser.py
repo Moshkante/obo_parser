@@ -90,7 +90,7 @@ def parse_obo_format(lines):
 
     obo_records_dict = collections.OrderedDict()
     current_stanza_type = {}
-    current_record = {} #error must be here somewhere!
+    current_record = {}
     if logger.isEnabledFor(logging.INFO):
         lines = tqdm.tqdm(lines, unit=" lines")
 
@@ -326,7 +326,6 @@ def _compute_tsv_header(obo_records):
     header.extend(other_columns)
 
     return header
-
 
 def write_tsv(obo_records_dict, output_stream, root_id=None, separator=", "):
     """Write obo_records_dict to the given output_stream.
