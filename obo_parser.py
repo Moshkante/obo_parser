@@ -15,6 +15,7 @@ import re
 import sys
 import tqdm
 import urllib
+import urllib.request
 
 from builtins import dict
 if sys.version_info >= (3, 0):
@@ -94,6 +95,10 @@ def parse_obo_format(lines):
         lines = tqdm.tqdm(lines, unit=" lines")
 
     for line in lines:
+        if isinstance(line, str) == False:
+            line = line.decode('utf-8') #from byte to string if necessary
+            continue
+            
         if line.startswith("["):
             current_stanza_type = line.strip("[]\n")
             continue
