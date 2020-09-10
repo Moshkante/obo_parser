@@ -90,7 +90,7 @@ def parse_obo_format(lines):
 
     obo_records_dict = collections.OrderedDict()
     current_stanza_type = None
-    current_record = None
+    current_record = None #error must be here somewhere!
     if logger.isEnabledFor(logging.INFO):
         lines = tqdm.tqdm(lines, unit=" lines")
 
