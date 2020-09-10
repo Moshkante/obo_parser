@@ -97,7 +97,6 @@ def parse_obo_format(lines):
     for line in lines:
         if isinstance(line, str) == False:
             line = line.decode('utf-8') #from byte to string if necessary
-            continue
             
         if line.startswith("["):
             current_stanza_type = line.strip("[]\n")
